@@ -1,0 +1,4 @@
+:80 {
+    root * /www
+    php_fastcgi phpfpm:9000
+}

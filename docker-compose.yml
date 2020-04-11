@@ -1,0 +1,65 @@
+version: '3'
+
+volumes:
+  vol_mysql57:
+  vol_mysql80:
+networks:
+  devbox:
+
+services:
+  caddy:
+    image: caddy/caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./www:/www
+    networks:
+      - devbox
+  phpfpm:
+    image: devbox/phpfpm
+    build:
+      context: ./phpfpm
+      dockerfile: Dockerfile
+      args:
+        USER_ID: 1000
+        GROUP_ID: 1000
+    networks:
+      - devbox
+    volumes:
+      - ./www:/www
+  redis:
+    image: redis:5-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - devbox
+  mysql57:
+    image: mysql:5.7
+    ports:
+      - 5706:3306
+    networks:
+      - devbox
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+    volumes:
+      - vol_mysql57:/var/lib/mysql
+  mysql80:
+    image: mysql:8.0
+    ports:
+      - 8006:3306
+    networks:
+      - devbox
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+    volumes:
+      - vol_mysql80:/var/lib/mysql
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - devbox
+      
