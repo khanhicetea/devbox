@@ -48,6 +48,7 @@ Temporary Items
 
 # DevBox
 
+/caddy/Caddysites
 /www/**
 !/www/index.html
 !/www/info.php

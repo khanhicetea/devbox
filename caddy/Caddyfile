@@ -1,4 +1,6 @@
 :80 {
     root * /www
-    php_fastcgi phpfpm:9000
+    file_server
 }
+
+import Caddysites

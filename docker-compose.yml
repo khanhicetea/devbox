@@ -14,6 +14,7 @@ services:
       - 443:443
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/Caddysites:/etc/caddy/Caddysites
       - ./www:/www
     networks:
       - devbox
