@@ -19,10 +19,22 @@ services:
     networks:
       - devbox
   phpfpm:
-    image: devbox/phpfpm
+    image: devbox/phpfpm-alpine:dev
     build:
       context: ./phpfpm
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.alpine-dev
+      args:
+        USER_ID: 1000
+        GROUP_ID: 1000
+    networks:
+      - devbox
+    volumes:
+      - ./www:/www
+  phpfpm_xdebug:
+    image: devbox/phpfpm-alpine:xdebug
+    build:
+      context: ./phpfpm
+      dockerfile: Dockerfile.alpine-xdebug
       args:
         USER_ID: 1000
         GROUP_ID: 1000
