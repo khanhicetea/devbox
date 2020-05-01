@@ -3,8 +3,13 @@ version: '3'
 volumes:
   vol_mysql57:
   vol_mysql80:
+  vol_adminer_tmp:
 networks:
   devbox:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.72.0.0/24
 
 services:
   caddy:
@@ -42,6 +47,15 @@ services:
       - devbox
     volumes:
       - ./www:/www
+  adminer:
+    image: devbox/adminer
+    build:
+      context: ./adminer
+      dockerfile: Dockerfile
+    networks:
+      - devbox
+    volumes:
+      - vol_adminer_tmp:/tmp
   redis:
     image: redis:5-alpine
     ports:
