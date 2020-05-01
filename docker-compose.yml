@@ -10,8 +10,8 @@ services:
   caddy:
     image: caddy/caddy
     ports:
-      - 80:80
-      - 443:443
+      - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/Caddysites:/etc/caddy/Caddysites
@@ -45,23 +45,23 @@ services:
   redis:
     image: redis:5-alpine
     ports:
-      - 6379:6379
+      - 127.0.0.1:6379:6379
     networks:
       - devbox
-  mysql57:
-    image: mysql:5.7
-    ports:
-      - 5706:3306
-    networks:
-      - devbox
-    environment:
-      MYSQL_ROOT_PASSWORD: passwd
-    volumes:
-      - vol_mysql57:/var/lib/mysql
+  # mysql57:
+  #   image: mysql:5.7
+  #   ports:
+  #     - 5706:3306
+  #   networks:
+  #     - devbox
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: passwd
+  #   volumes:
+  #     - vol_mysql57:/var/lib/mysql
   mysql80:
     image: mysql:8.0
     ports:
-      - 8006:3306
+      - 127.0.0.1:8006:3306
     networks:
       - devbox
     environment:
@@ -71,8 +71,8 @@ services:
   mailhog:
     image: mailhog/mailhog
     ports:
-      - 1025:1025
-      - 8025:8025
+      - 127.0.0.1:1025:1025
+      - 127.0.0.1:8025:8025
     networks:
       - devbox
       
