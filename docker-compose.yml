@@ -13,7 +13,7 @@ networks:
 
 services:
   caddy:
-    image: caddy/caddy
+    image: caddy/caddy:2-alpine
     ports:
       - 127.0.0.1:80:80
       - 127.0.0.1:443:443
@@ -35,27 +35,27 @@ services:
       - devbox
     volumes:
       - ./www:/www
-  phpfpm_xdebug:
-    image: devbox/phpfpm-alpine:xdebug
-    build:
-      context: ./phpfpm
-      dockerfile: Dockerfile.alpine-xdebug
-      args:
-        USER_ID: 1000
-        GROUP_ID: 1000
-    networks:
-      - devbox
-    volumes:
-      - ./www:/www
-  adminer:
-    image: devbox/adminer
-    build:
-      context: ./adminer
-      dockerfile: Dockerfile
-    networks:
-      - devbox
-    volumes:
-      - vol_adminer_tmp:/tmp
+  # phpfpm_xdebug:
+  #   image: devbox/phpfpm-alpine:xdebug
+  #   build:
+  #     context: ./phpfpm
+  #     dockerfile: Dockerfile.alpine-xdebug
+  #     args:
+  #       USER_ID: 1000
+  #       GROUP_ID: 1000
+  #   networks:
+  #     - devbox
+  #   volumes:
+  #     - ./www:/www
+  # adminer:
+  #   image: devbox/adminer
+  #   build:
+  #     context: ./adminer
+  #     dockerfile: Dockerfile
+  #   networks:
+  #     - devbox
+  #   volumes:
+  #     - vol_adminer_tmp:/tmp
   redis:
     image: redis:5-alpine
     ports:
@@ -65,7 +65,7 @@ services:
   mysql80:
     image: mysql:8.0
     ports:
-      - 127.0.0.1:8006:3306
+      - 127.0.0.1:3306:3306
     networks:
       - devbox
     environment:
@@ -82,11 +82,11 @@ services:
   #     MYSQL_ROOT_PASSWORD: passwd
   #   volumes:
   #     - vol_mysql57:/var/lib/mysql
-  # mailhog:
-  #   image: mailhog/mailhog
-  #   ports:
-  #     - 127.0.0.1:1025:1025
-  #     - 127.0.0.1:8025:8025
-  #   networks:
-  #     - devbox
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 127.0.0.1:1025:1025
+      - 127.0.0.1:8025:8025
+    networks:
+      - devbox
       

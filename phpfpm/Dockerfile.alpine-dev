@@ -1,6 +1,6 @@
 FROM php:7.4-fpm-alpine
 
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions gd pdo_pgsql pdo_mysql zip redis pcntl
@@ -20,7 +20,5 @@ ARG GROUP_ID
 RUN addgroup -g $GROUP_ID phpfpm
 RUN adduser -D -g '' -u $USER_ID -G phpfpm phpfpm
 USER phpfpm
-
-RUN composer global require -vvv --prefer-dist hirak/prestissimo && rm -rf /home/phpfpm/.composer/cache
 
 CMD ["php-fpm"]
