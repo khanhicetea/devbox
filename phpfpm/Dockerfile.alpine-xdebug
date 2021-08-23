@@ -1,9 +1,9 @@
 FROM php:7.4-fpm-alpine
 
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions gd pdo_pgsql pdo_mysql zip redis xdebug
+    install-php-extensions gd pdo_pgsql pdo_mysql zip redis pcntl xdebug
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php -r "if (hash_file('sha384', 'composer-setup.php') === file_get_contents('https://composer.github.io/installer.sig')) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
@@ -22,6 +22,6 @@ RUN addgroup -g $GROUP_ID phpfpm
 RUN adduser -D -g '' -u $USER_ID -G phpfpm phpfpm
 USER phpfpm
 
-RUN composer global require -vvv --prefer-dist hirak/prestissimo && rm -rf /home/phpfpm/.composer/cache
+RUN mkdir /tmp/xdebug
 
 CMD ["php-fpm"]
