@@ -1,0 +1,38 @@
+{
+	# Listen this port because run as non-root then forwarding traffic
+	http_port 10080
+	https_port 10443
+}
+
+(kittls) {
+	# Using mkcert util to generate certificates
+	tls tls/kit.dev.crt tls/kit.dev.key
+}
+
+(common) {
+	bind 127.0.0.1
+	file_server
+	encode gzip
+
+	@static {
+		file
+		path *.css *.js *.ico *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2
+	}
+	header @static Cache-Control "no-cache, no-store, must-revalidate"
+}
+
+(php81) {
+	import common
+	php_fastcgi 127.0.0.1:8101
+}
+
+(php82) {
+	import common
+	php_fastcgi 127.0.0.1:8201
+}
+
+kit.dev {
+	root * www
+	import kittls
+	import php82
+}
