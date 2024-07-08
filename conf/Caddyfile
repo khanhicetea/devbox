@@ -31,8 +31,97 @@
 	php_fastcgi 127.0.0.1:8201
 }
 
+(php83) {
+	import common
+	php_fastcgi 127.0.0.1:8301
+}
+
 kit.dev {
 	root * www
+	import kittls
+	import php82
+}
+
+poem.kit.dev {
+	root * www/poem.kit.dev/public
+	import kittls
+	import php81
+}
+
+statamic.kit.dev {
+	root * www/statamic.kit.dev/public
+	import kittls
+	import php82
+}
+
+crm.kit.dev {
+	root * www/crm.kit.dev/public
+	import kittls
+	import php82
+}
+
+ecom.kit.dev {
+	root * www/ecom.kit.dev/public
+	import kittls
+	import php82
+}
+
+mez.kit.dev {
+	root * www/mez.kit.dev/public
+	import kittls
+	import php82
+}
+
+sym.kit.dev {
+	root * www/sym.kit.dev/public
+	import kittls
+	import php82
+}
+
+icetea.kit.dev {
+	root * www/icetea.kit.dev/public
+	import kittls
+	import php82
+}
+
+jslar.kit.dev {
+	root * www/jslar.kit.dev/public
+	import kittls
+	import php82
+}
+
+jet.kit.dev {
+	root * www/jet.kit.dev/public
+	import kittls
+	import php82
+}
+
+lms.kit.dev {
+	root * www/lms.kit.dev/public
+	import kittls
+	import php82
+}
+
+zanalytic.kit.dev {
+	root * www/zanalytic.kit.dev/public
+	import kittls
+	import php82
+}
+
+newdl.kit.dev {
+	root * www/newdl.kit.dev/public
+	import kittls
+	import php82
+}
+
+stamic.kit.dev {
+	root * www/stamic.kit.dev/public
+	import kittls
+	import php82
+}
+
+filament.kit.dev {
+	root * www/filament.kit.dev/public
 	import kittls
 	import php82
 }
