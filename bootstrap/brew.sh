@@ -1,6 +1,7 @@
 #!/bin/sh
 
 brew install hivemind
+brew install mkcert
 brew install caddy
 brew install redis
 brew install mysql
