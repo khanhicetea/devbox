@@ -2,6 +2,9 @@
 	# Listen this port because run as non-root then forwarding traffic
 	http_port 10080
 	https_port 10443
+	servers {
+        protocols h1 h2
+    }
 }
 
 (kittls) {
