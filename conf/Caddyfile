@@ -30,11 +30,6 @@
 	header @xdebug_query Debug 1
 }
 
-(php81) {
-	import common
-	php_fastcgi 127.0.0.1:8101
-}
-
 (php82) {
 	import common
 	php_fastcgi 127.0.0.1:8201
